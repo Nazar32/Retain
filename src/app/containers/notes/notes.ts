@@ -8,7 +8,8 @@ import { Component } from '@angular/core';
 
 export class NotesContainer {
     note = { 
-        title : "this is a title",
-        value : "this is a value"
+        title: "this is a title",
+        value: "this is a value",
+        color: "lightblue"
     };
 };
