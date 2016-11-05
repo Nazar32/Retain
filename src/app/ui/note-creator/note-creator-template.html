@@ -3,6 +3,7 @@
         <input
           type="text"
           [(ngModel)]="newNote.title"
+          *ngIf="fullForm"
           name="newNoteTitle"
           placeholder="Title"
           class="col-xs-10 title"
@@ -10,11 +11,15 @@
         <input
           type="text"
           [(ngModel)]="newNote.value"
+          (focus)="toggleFormView(true)"
           name="newNoteValue"
           placeholder="Take a note..."
           class="col-xs-10"
         />
-        <div class="actions col-xs-12 row between-xs">
+        <div 
+          class="actions col-xs-12 row between-xs"
+          *ngIf="fullForm"
+        >
           <button
             type="submit"
             class="btn-light"
@@ -23,5 +28,4 @@
           </button>
         </div>
     </form>
-    <pre>{{newNote | json}}</pre>
 </div>

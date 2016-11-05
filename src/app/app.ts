@@ -6,6 +6,5 @@ import { Component } from '@angular/core';
 })
 
 export class App {
-    a : string = "value";
-    b : string = "value1";
+   
 } 

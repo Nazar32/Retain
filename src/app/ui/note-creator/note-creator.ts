@@ -14,20 +14,24 @@ import {
 
 export class NoteCreator {
     @Output() createNote = new EventEmitter();
-
+    
     newNote = {
         title : '',
         value: ''
     }
+    
+    fullForm: boolean = false;
+
 
     onCreateNote() {  
-        const {title, value } = this.newNote;
+        const {title, value} = this.newNote;
 
         if (title && value) {
             this.createNote.next({title, value});
         }
 
         this.reset();
+        this.toggleFormView(false);
     }
 
     reset() {
@@ -35,5 +39,9 @@ export class NoteCreator {
             title : '',
             value: ''
         }
+    }
+
+    toggleFormView(value: boolean) {
+        this.fullForm = value;
     }
 }
