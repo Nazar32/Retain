@@ -7,9 +7,13 @@ import { Component } from '@angular/core';
 })
 
 export class NotesContainer {
-    note = { 
-        title: "this is a title",
-        value: "this is a value",
-        color: "lightblue"
-    };
+    notes = [
+        { title: "Education", value: "Finish all the labs", color: "lightblue" },
+        { title: "CV", value: "Refactor my CV", color: "red" },
+        { title: "Cook", value: "Cook my dinner", color: "aqua" }
+    ];
+
+    onNoteChecked(i: number) {
+        this.notes.splice(i, 1);
+    }
 };

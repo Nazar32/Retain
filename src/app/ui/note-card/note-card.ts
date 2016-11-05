@@ -1,6 +1,8 @@
 import { 
     Component,
-    Input
+    Input,
+    Output,
+    EventEmitter
 } from '@angular/core';
 
 @Component ({
@@ -11,6 +13,7 @@ import {
 
 export class NoteCard {
     @Input() note = {};
+    @Output() checked = new EventEmitter();
     showCheck: boolean = false;
 
     toggleCheck() {
@@ -18,6 +21,6 @@ export class NoteCard {
     }
 
     onChecked() {
-       //change styles of note-card 
+       this.checked.next(this.note);
     } 
 };
