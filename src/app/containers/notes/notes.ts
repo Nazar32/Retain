@@ -16,4 +16,8 @@ export class NotesContainer {
     onNoteChecked(i: number) {
         this.notes.splice(i, 1);
     }
+
+    onCreateNote(note) {
+        this.notes.push(note);
+    }
 };
