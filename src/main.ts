@@ -1,8 +1,9 @@
-import {NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { FormsModule } from '@angular/forms';
-import { App } from './app';
+import { HttpModule } from '@angular/http';
+import { App, providers } from './app';
 import { Main, NotesContainer } from './app/containers';
 import {
      AppBar,
@@ -21,7 +22,8 @@ import {
         NoteCreator,
         ColorPicker 
     ],
-    imports: [BrowserModule, FormsModule],
+    providers: providers,
+    imports: [BrowserModule, FormsModule, HttpModule],
     bootstrap: [App]
 })
 
