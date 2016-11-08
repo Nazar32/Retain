@@ -1,4 +1,4 @@
-<div class="note-creator shadow-2">
+<div class="note-creator shadow-2" [ngStyle]="{'background-color': newNote.color}">
       <form class="row" (submit)="onCreateNote()">
         <input
           type="text"
@@ -20,6 +20,13 @@
           class="actions col-xs-12 row between-xs"
           *ngIf="fullForm"
         >
+        <div class="col-xs-3">
+          <color-picker
+          [colors]="colors"
+          (selected)="onColorSelected($event)"
+          >
+          </color-picker>
+        </div>
           <button
             type="submit"
             class="btn-light"

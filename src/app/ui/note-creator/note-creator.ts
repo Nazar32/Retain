@@ -14,20 +14,23 @@ import {
 
 export class NoteCreator {
     @Output() createNote = new EventEmitter();
-    
+    readonly defaultColor: string = 'white';
+    colors: string[] = ['#B19CD9', '#FF6961', '#77DD77', '#AEC6CF', '#F49AC2'];
     newNote = {
         title : '',
-        value: ''
+        value: '',
+        color: this.defaultColor
     }
     
     fullForm: boolean = false;
 
 
-    onCreateNote() {  
-        const {title, value} = this.newNote;
+    onCreateNote() {
 
-        if (title && value) {
-            this.createNote.next({title, value});
+        const {title, value, color} = this.newNote;
+
+        if (title && value && color) {
+            this.createNote.next({title, value, color});
         }
 
         this.reset();
@@ -37,11 +40,16 @@ export class NoteCreator {
     reset() {
         this.newNote = {
             title : '',
-            value: ''
+            value: '',
+            color: this.defaultColor
         }
     }
 
     toggleFormView(value: boolean) {
         this.fullForm = value;
+    }
+
+    onColorSelected(color) {
+        this.newNote.color = color;
     }
 }
