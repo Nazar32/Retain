@@ -27,8 +27,6 @@ import {
     bootstrap: [App]
 })
 
-export class AppModule {
-
-};
+export class AppModule { };
 
 platformBrowserDynamic().bootstrapModule(AppModule);

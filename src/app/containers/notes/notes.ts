@@ -12,7 +12,7 @@ export class NotesContainer {
 
     constructor(private noteService: NoteService ) {
         this.noteService.getNotes()
-        .subscribe(resp => this.notes = resp.data);
+        .subscribe(resp => { console.log(resp.data); this.notes = resp.data});
     }
 
     onNoteChecked(note) {

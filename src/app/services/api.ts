@@ -1,39 +1,38 @@
 import { Injectable } from '@angular/core';
 import { Headers, Response, Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable'; 
-import 'rxjs/add/observable/throw';
+//import 'rxjs/Rx';
+//import 'rxjs/add/observable/throw';
 
 @Injectable()
 export class ApiService {
     headers: Headers = new Headers({
         'Content-Type': 'application/json',
-        'Accept': 'application/json'
+        Accept: 'application/json'
     });
 
     api_url: string = 'http://localhost:3500';
 
-    constructor(private http: Http) {
-
-    }
+    constructor(private http: Http) {  }
 
     private getJson(response: Response) {
-        return response.json;
+        return response.json();
     }
 
     private checkForError(response: Response): Response {
         if (response.status >= 200 && response.status < 300) {
             return response;
         }
-        else {
-            const error = new Error(response.statusText);
+        else {  
+            var error = new Error(response.statusText);
             error['response'] = response;
-            console.log(error);
+            console.error(error);
             throw error;
         }
     }
 
     get(path:string): Observable<any> {
-        return this.http.get('${this.api_url}${path}', this.headers)
+        return this.http.get(`${this.api_url}${path}`, { headers : this.headers } )
         .map(this.checkForError)
         .catch(err => Observable.throw(err))
         .map(this.getJson)
@@ -41,7 +40,7 @@ export class ApiService {
 
     post(path: string, body): Observable<any> {
         return this.http.post(
-            '${this.api_url}${path}',
+            `${this.api_url}${path}`,
             JSON.stringify(body),
             {headers: this.headers}
         )
@@ -51,7 +50,10 @@ export class ApiService {
     }
 
     delete(path:string): Observable<any> {
-        return this.http.delete('${this.api_url}${path}', this.headers)
+        return this.http.delete(
+            `${this.api_url}${path}`,
+             {headers : this.headers} 
+        )
         .map(this.checkForError)
         .catch(err => Observable.throw(err))
         .map(this.getJson)
