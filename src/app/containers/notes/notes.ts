@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NoteService } from '../../services';
-
+import { Store } from '../../store';
 @Component({
     selector: 'notes-container',
     templateUrl: 'app/containers/notes/template.html',
@@ -10,21 +10,24 @@ import { NoteService } from '../../services';
 export class NotesContainer {
     notes = [];
 
-    constructor(private noteService: NoteService ) {
+    constructor(private noteService: NoteService,
+                private store: Store
+                ) {
         this.noteService.getNotes()
-        .subscribe(resp => { console.log(resp.data); this.notes = resp.data});
+        .subscribe();
+
+        this.store.changes
+        .map(data => data.notes)
+        .subscribe(notes => this.notes = notes)
     }
 
     onNoteChecked(note) {
         this.noteService.completeNote(note)
-        .subscribe(note => {
-            const i = this.notes.findIndex(localNote => localNote.id === note.id);
-            this.notes.splice(i, 1);
-        });
+        .subscribe();
     }
 
     onCreateNote(note) {
         this.noteService.createNote(note)
-        .subscribe(note => this.notes.push(note));
+        .subscribe();
     }
 };
