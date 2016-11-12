@@ -21,7 +21,7 @@ export class NoteService {
 
     completeNote(note) {
         return this.api.delete(`${this.path}/${note.id}`)
-        .do((note: any) => this.storeHelper.findAndDelete('note', note.id));
+        .do((note: any) => this.storeHelper.findAndDelete('notes', note.id));
     }
 
 }
